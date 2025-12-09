@@ -5,10 +5,14 @@ from player import *
 from asteroid import *
 from asteroidfield import *
 from shot import *
+from logger import log_state
 
 def main():
     pygame.init()
+    print("Starting Asteroids")
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    print(f"Screen width: {SCREEN_WIDTH}")
+    print(f"Screen height: {SCREEN_HEIGHT}")
     clock = pygame.time.Clock()
     dt = 0
     text_x = 10
@@ -43,6 +47,7 @@ def main():
         for asteroid in asteroids:
             if asteroid.collision(player1) == True:
                 print("Game over!")
+                print(f"Final Score: {score_value}")
                 sys.exit()
         for asteroid in asteroids:
             for shot in shots:
@@ -53,6 +58,8 @@ def main():
         for sprite in drawable:
             sprite.draw(screen)
         pygame.display.flip()
+
+        log_state()
 
         dt = clock.tick(60) / 1000
 
